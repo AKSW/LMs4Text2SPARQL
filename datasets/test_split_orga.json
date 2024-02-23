@@ -1,0 +1,38 @@
+{
+    "question": [
+        "What is the first name of Anne Miller?",
+        "What is the surname of Bob Tanner?",
+        "Which person has a home address in the UK?",
+        "What is the label of the research department?",
+        "What is the label of the marketing department?",
+        "Who is the member of the research department as the chief research officer?",
+        "Who is the member of the marketing department as the marketing manager?",
+        "How many persons exist in the graph?",
+        "How many organizational units exist in the graph?",
+        "How many memberships exist in the graph?",
+        "How many persons are members of the research department?",
+        "How many persons are members of the marketing department?",
+        "How many persons have a home address?",
+        "How many persons have a home address in the UK?",
+        "How many persons have a home address in the US?",
+        "How many roles exist in the graph?"
+    ],
+    "query": [
+        "SELECT ?firstName WHERE { :anne foaf:firstName ?firstName . }",
+        "SELECT ?surname WHERE { :bob foaf:surname ?surname . }",
+        "SELECT ?person WHERE { ?person vcard:hasAddress [ vcard:country-name 'UK' ] . }",
+        "SELECT ?label WHERE { :researchDep rdfs:label ?label . }",
+        "SELECT ?label WHERE { :marketingDep rdfs:label ?label . }",
+        "SELECT ?member WHERE { [ org:member ?member ; org:organization :researchDep ; org:role :chiefResearchOfficer ] . }",
+        "SELECT ?member WHERE { [ org:member ?member ; org:organization :marketingDep ; org:role :marketingManager ] . }",
+        "SELECT (count(?person) as ?count) WHERE { ?person a foaf:Person . }",
+        "SELECT (count(?organizationalUnit) as ?count) WHERE { ?organizationalUnit a org:OrganizationalUnit . }",
+        "SELECT (count(?membership) as ?count) WHERE { ?membership a org:Membership . }",
+        "SELECT (count(?member) as ?count) WHERE { ?member org:organization :researchDep . }",
+        "SELECT (count(?member) as ?count) WHERE { ?member org:organization :marketingDep . }",
+        "SELECT (count(?person) as ?count) WHERE { ?person vcard:hasAddress [] . }",
+        "SELECT (count(?person) as ?count) WHERE { ?person vcard:hasAddress [ vcard:country-name 'UK' ] . }",
+        "SELECT (count(?person) as ?count) WHERE { ?person vcard:hasAddress [ vcard:country-name 'US' ] . }",
+        "SELECT (count(?role) as ?count) WHERE { ?role a org:Role . }"
+    ]
+}

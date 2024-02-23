@@ -1,0 +1,42 @@
+{
+    "question": [
+        "What is the longitude of the port with the ID 'USJNU'?",
+        "What is the longitude of the port identified as 'USJNU'?",
+        "What is the operating country of the port with the ID 'BRITJ'?",
+        "What is the country where the port with the identification code 'BRITJ' is located?",
+        "How many ports are located in Italy?",
+        "What is the number of ports in Italy?",
+        "How many ports have 'fuel oil' supplies available?",
+        "How many ports offer supplies of 'fuel oil'?",
+        "How many ports have 'provisions' supplies available?",
+        "How many ports have available supplies of 'provisions'?",
+        "What is the total number of seats per year at the airport with the ID 'SKD'?",
+        "How many seats are available annually at the airport identified as 'SKD'?",
+        "How many ports require 'Tide restriction'?",
+        "How many ports have restrictions on the use of Tide?",
+        "What is the size class of the port with the label 'Juneau'?",
+        "What is the size category of the port labeled as 'Juneau'?",
+        "What is the latitude of the port with the ID 'AUDKB'?",
+        "What is the latitude of the port identified as 'AUDKB'?"
+    ],
+    "query": [
+        "SELECT ?longitude WHERE { <https://data.coypu.org/infrastructure/port/USJNU> ns2:hasLongitude ?longitude }",
+        "SELECT ?longitude WHERE { <https://data.coypu.org/infrastructure/port/USJNU> ns2:hasLongitude ?longitude }",
+        "SELECT ?country WHERE { <https://data.coypu.org/infrastructure/port/BRITJ> ns3:hasOperatingCountry ?country }",
+        "SELECT ?country WHERE { <https://data.coypu.org/infrastructure/port/BRITJ> ns3:hasOperatingCountry ?country }",
+        "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns2:hasLocation <https://data.coypu.org/country/ITA> }",
+        "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns2:hasLocation <https://data.coypu.org/country/ITA> }",
+        "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasSuppliesFuelOil true }",
+        "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasSuppliesFuelOil true }",
+        "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasSuppliesProvisions true }",
+        "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasSuppliesProvisions true }",
+        "SELECT ?seats WHERE { <https://data.coypu.org/infrastructure/airport/SKD> ns2:hasTotalSeatsPerYear ?seats }",
+        "SELECT ?seats WHERE { <https://data.coypu.org/infrastructure/airport/SKD> ns2:hasTotalSeatsPerYear ?seats }",
+        "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasEntranceRestrictionTide true }",
+        "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasEntranceRestrictionTide true }",
+        "SELECT ?sizeClass WHERE { ?port rdfs:label 'Juneau' . ?port ns1:hasPortSize ?sizeClass }",
+        "SELECT ?sizeClass WHERE { ?port rdfs:label 'Juneau' . ?port ns1:hasPortSize ?sizeClass }",
+        "SELECT ?latitude WHERE { <https://data.coypu.org/infrastructure/port/AUWMB> ns2:hasLatitude ?latitude }",
+        "SELECT ?latitude WHERE { <https://data.coypu.org/infrastructure/port/AUWMB> ns2:hasLatitude ?latitude }"
+    ]
+}
