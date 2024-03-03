@@ -19,9 +19,10 @@
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, Seq2SeqTrainingArguments, Seq2SeqTrainer, DataCollatorForSeq2Seq
 from peft import LoraConfig, TaskType, get_peft_model
 import json
+import torch
 from sklearn.model_selection import train_test_split
 from datasets import Dataset, load_dataset
-
+from pathlib import Path
 import argparse
 
 parser = argparse.ArgumentParser()
@@ -29,6 +30,7 @@ parser.add_argument("--num-epochs", type=int, default=50, help="Number of traini
 parser.add_argument("--dataset", type=str, required=True, choices=["coypu", "orga", "lcquad"])
 
 cmd_args = parser.parse_args()
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 models = [
     # T5 family
@@ -127,7 +129,7 @@ for checkpoint in models:
 
         results = []
         for item in test_ds:
-            inputs =  tokenizer(item["question"], return_tensors="pt").to("cuda:0")
+            inputs =  tokenizer(item["question"], return_tensors="pt").to(device)
             out = tokenizer.batch_decode(model.generate(**inputs, max_new_tokens=256), skip_special_tokens=True)
             results.append({
                 "question": item["question"],
@@ -135,6 +137,7 @@ for checkpoint in models:
                 "generated":  out[0]
             })
 
+        Path("results").mkdir(parents=True, exist_ok=True)
         with open(f"results/{dir_prefix}_{dataset}_{idx+1}.json", "w") as fp:
             json.dump(results, fp, indent=4)
 
