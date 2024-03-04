@@ -19,9 +19,10 @@
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, Seq2SeqTrainingArguments, Seq2SeqTrainer, DataCollatorForSeq2Seq
 from peft import LoraConfig, TaskType, get_peft_model
 import json
+import torch
 from sklearn.model_selection import train_test_split
 from datasets import Dataset, load_dataset
-
+from pathlib import Path
 import argparse
 
 parser = argparse.ArgumentParser()
@@ -29,6 +30,7 @@ parser.add_argument("--num-epochs", type=int, default=50, help="Number of traini
 parser.add_argument("--dataset", type=str, required=True, choices=["coypu", "orga", "lcquad"])
 
 cmd_args = parser.parse_args()
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 models = [
     # T5 family
@@ -54,6 +56,7 @@ for checkpoint in models:
 
     dir_prefix = checkpoint.replace("/", "_")
     model_dir = f"models/{dir_prefix}_text2sparql"
+    print(f"Running... models/{dir_prefix}_text2sparql")
 
     dataset = cmd_args.dataset
     if dataset == "lc_quad":
@@ -70,7 +73,6 @@ for checkpoint in models:
 
         train_ds = Dataset.from_dict(train_ds)
         test_ds = Dataset.from_dict(test_ds)
-
 
     tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
@@ -101,8 +103,6 @@ for checkpoint in models:
             model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint)
             print("Initializing a new instance of the model.")
 
-
-
         args = Seq2SeqTrainingArguments(
             model_dir,
             num_train_epochs = 5,
@@ -127,7 +127,7 @@ for checkpoint in models:
 
         results = []
         for item in test_ds:
-            inputs =  tokenizer(item["question"], return_tensors="pt").to("cuda:0")
+            inputs =  tokenizer(item["question"], return_tensors="pt").to(device)
             out = tokenizer.batch_decode(model.generate(**inputs, max_new_tokens=256), skip_special_tokens=True)
             results.append({
                 "question": item["question"],
@@ -135,6 +135,8 @@ for checkpoint in models:
                 "generated":  out[0]
             })
 
+        Path("results").mkdir(parents=True, exist_ok=True)
         with open(f"results/{dir_prefix}_{dataset}_{idx+1}.json", "w") as fp:
+            print(f"Writing file: results/{dir_prefix}_{dataset}_{idx+1}.json")
             json.dump(results, fp, indent=4)
 
