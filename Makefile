@@ -21,6 +21,10 @@ run-coypu:
 run-orga:
 	docker run --rm -it --init --ipc=host --user="$(id -u):$(id -g)" --volume="$(shell pwd):/app" akws/lms4text2sparql python3 train.py --dataset orga
 
+## run the orga dataset with one epoch
+run-orga-one-epoch:
+	docker run --rm -it --init --ipc=host --user="$(id -u):$(id -g)" --volume="$(shell pwd):/app" akws/lms4text2sparql python3 train.py --dataset orga --num-epochs 5
+
 #############################
 ## Help Target             ##
 #############################

@@ -56,6 +56,7 @@ for checkpoint in models:
 
     dir_prefix = checkpoint.replace("/", "_")
     model_dir = f"models/{dir_prefix}_text2sparql"
+    print(f"Running... models/{dir_prefix}_text2sparql")
 
     dataset = cmd_args.dataset
     if dataset == "lc_quad":
@@ -72,7 +73,6 @@ for checkpoint in models:
 
         train_ds = Dataset.from_dict(train_ds)
         test_ds = Dataset.from_dict(test_ds)
-
 
     tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
@@ -102,8 +102,6 @@ for checkpoint in models:
         except:
             model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint)
             print("Initializing a new instance of the model.")
-
-
 
         args = Seq2SeqTrainingArguments(
             model_dir,
@@ -139,5 +137,6 @@ for checkpoint in models:
 
         Path("results").mkdir(parents=True, exist_ok=True)
         with open(f"results/{dir_prefix}_{dataset}_{idx+1}.json", "w") as fp:
+            print(f"Writing file: results/{dir_prefix}_{dataset}_{idx+1}.json")
             json.dump(results, fp, indent=4)
 
