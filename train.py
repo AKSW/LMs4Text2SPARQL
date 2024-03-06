@@ -51,6 +51,8 @@ parser.add_argument("--num-epochs", type=int, default=50, help="Number of traini
 parser.add_argument("--dataset", type=str, required=True, choices=["coypu", "orga", "lcquad", "qald10"])
 parser.add_argument("--run-id", type=str, required=False, default="", help="This will be appended to the name of the json file, useful for consecutive runs of the script")
 parser.add_argument("--force-new-model", action="store_true", help="If true, the script will ignore any pretrained models on the disk and always instantiate a new one")
+parser.add_argument("--shuffle-dataset", action="store_true", help="If true, the script will shuffle the dataset before training")
+parser.add_argument("--shuffle-seed", type=int, required=False, default=42, help="Seed for the random shuffle")
 
 cmd_args = parser.parse_args()
 run_id = cmd_args.run_id
@@ -60,23 +62,23 @@ if run_id != "":
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 models = [
-    # T5 family
-    "t5-small",
-    "t5-base",
-    "t5-large",
-    "google/flan-t5-small",
-    "google/flan-t5-base",
-   
-    # BART family
-    "facebook/bart-base",
-    "facebook/bart-large",
-    "facebook/mbart-large-50",
-    "Babelscape/mrebel-base",
-    "Babelscape/mrebel-large",
-
-    # M2M100 family
+#    # T5 family
+#    "t5-small",
+#    "t5-base",
+#    "t5-large",
+#    "google/flan-t5-small",
+#    "google/flan-t5-base",
+#   
+#    # BART family
+#    "facebook/bart-base",
+#    "facebook/bart-large",
+#    "facebook/mbart-large-50",
+#    "Babelscape/mrebel-base",
+#    "Babelscape/mrebel-large",
+#
+#    # M2M100 family
     "facebook/m2m100_418M",
-    "facebook/nllb-200-distilled-600M"
+#    "facebook/nllb-200-distilled-600M"
 ]
 
 for checkpoint in models:
@@ -135,6 +137,9 @@ for checkpoint in models:
     col_names = train_ds.column_names
     train_ds = train_ds.map(preprocess)
     test_ds = test_ds.map(preprocess)
+
+    if cmd_args.shuffle_dataset:
+        train_ds = train_ds.shuffle(seed=cmd_args.shuffle_seed)
 
 
     for idx in range((cmd_args.num_epochs // 5)):
