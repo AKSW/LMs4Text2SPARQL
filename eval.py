@@ -6,7 +6,13 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--num-epochs", type=int, default=50, help="Number of training epochs (default 50)")
 parser.add_argument("--dataset", type=str, required=True, choices=["coypu", "orga", "lcquad"])
+parser.add_argument("--run-id", type=str, required=False, default="", help="This will be appended to the name of the json file, useful for consecutive runs of the script")
+
 args = parser.parse_args()
+
+run_id = args.run_id
+if run_id != "":
+    run_id = f"_{run_id}"
 
 def result_sets_are_same(first, second):
     first, second = list(first), list(second)
@@ -90,7 +96,7 @@ for checkpoint in models:
     results = []
     for idx in range(args.num_epochs // 5):
         try:
-            with open(f"results/{dir_prefix}_{dataset}_{idx+1}.json", "r") as fp:
+            with open(f"results/{dir_prefix}_{dataset}{run_id}_{idx+1}.json", "r") as fp:
                 data = json.load(fp)
         except:
             break
@@ -116,9 +122,8 @@ for checkpoint in models:
         naive_correct = sum([ 1 if r["generated"] == r["query"] else 0 for r in data ])
         results.append(correct)
     result_dict[checkpoint] = results
-    n_results = len(results)
     results = " | ".join(map(str,results))
-    print(checkpoint, n_results, results)
+    print(checkpoint, results)
 
 final_dict = {
         "metadata": {
@@ -128,5 +133,5 @@ final_dict = {
         },
         "results": result_dict
 }
-with open(f"results/total_{dataset}.json", "w") as fp:
+with open(f"results/total_{dataset}{run_id}.json", "w") as fp:
     json.dump(final_dict, fp, indent=4)
