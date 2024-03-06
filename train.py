@@ -19,15 +19,36 @@
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, Seq2SeqTrainingArguments, Seq2SeqTrainer, DataCollatorForSeq2Seq
 from peft import LoraConfig, TaskType, get_peft_model
 import json
+import requests
 import torch
 from sklearn.model_selection import train_test_split
 from datasets import Dataset, load_dataset
 from pathlib import Path
 import argparse
 
+
+def qald_converter(qald_dataset_url):
+    r = requests.get(qald_dataset_url).json()["questions"]
+    ds = {
+        "question": [],
+        "query": []
+    }
+
+    for q in r:
+        english_questions = list(filter(lambda x: x["language"] == "en", q["question"]))
+        if len(english_questions) == 0:
+            continue
+        else:
+            question = english_questions[0]["string"]
+            ds["question"].append(question)
+            ds["query"].append(q["query"]["sparql"])
+    
+    return Dataset.from_dict(ds)
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--num-epochs", type=int, default=50, help="Number of training epochs (default 50)")
-parser.add_argument("--dataset", type=str, required=True, choices=["coypu", "orga", "lcquad"])
+parser.add_argument("--dataset", type=str, required=True, choices=["coypu", "orga", "lcquad", "qald10"])
 
 cmd_args = parser.parse_args()
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -64,6 +85,10 @@ for checkpoint in models:
 
         train_ds = dataset["train"].map(lambda row: { "query": row["sparql_dbpedia18"] }).filter(lambda row: row["question"] is not None).select(range(0,19000,100))
         test_ds = dataset["test"].map(lambda row: { "query": row["sparql_dbpedia18"] }).filter(lambda row: row["question"] is not None).select(range(0,4000,100))
+    elif dataset == "qald10":
+        train_ds = qald_converter("https://raw.githubusercontent.com/KGQA/QALD-10/main/data/qald_9_plus/qald_9_plus_train_wikidata.json")        
+        test_ds = qald_converter("https://raw.githubusercontent.com/KGQA/QALD-10/main/data/qald_10/qald_10.json")
+
     else:
         with open(f"datasets/train_split_{dataset}.json", "r") as fp:
             train_ds = json.load(fp)
