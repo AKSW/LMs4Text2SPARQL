@@ -1,7 +1,7 @@
 ###########################################################################
 #
-#            Author:   Felix Brei
-#            Last mod: 22.02.2024
+#            Author:   Felix Brei, Daniel Gerber
+#            Last mod: 06.03.2024
 #
 # This script iterates over a list of model checkpoints, then trains each
 # model for a user defined number of epochs on a chosen dataset (lcquad,
@@ -49,8 +49,14 @@ def qald_converter(qald_dataset_url):
 parser = argparse.ArgumentParser()
 parser.add_argument("--num-epochs", type=int, default=50, help="Number of training epochs (default 50)")
 parser.add_argument("--dataset", type=str, required=True, choices=["coypu", "orga", "lcquad", "qald10"])
+parser.add_argument("--run-id", type=str, required=False, default="", help="This will be appended to the name of the json file, useful for consecutive runs of the script")
+parser.add_argument("--force-new-model", action="store_true", help="If true, the script will ignore any pretrained models on the disk and always instantiate a new one")
 
 cmd_args = parser.parse_args()
+run_id = cmd_args.run_id
+if run_id != "":
+    run_id += "_"
+
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 models = [
@@ -78,6 +84,17 @@ for checkpoint in models:
     dir_prefix = checkpoint.replace("/", "_")
     model_dir = f"models/{dir_prefix}_text2sparql"
     print(f"Running... models/{dir_prefix}_text2sparql")
+
+    if cmd_args.force_new_model:
+        model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint)
+        print("Initializing a new instance of the model.")
+    else:
+        try:
+            model = AutoModelForSeq2SeqLM.from_pretrained(model_dir)
+            print("Loading model from disk.")
+        except:
+            model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint)
+            print("Initializing a new instance of the model.")
 
     dataset = cmd_args.dataset
     if dataset == "lc_quad":
@@ -119,14 +136,8 @@ for checkpoint in models:
     train_ds = train_ds.map(preprocess)
     test_ds = test_ds.map(preprocess)
 
-    for idx in range((cmd_args.num_epochs // 5)):
 
-        try:
-            model = AutoModelForSeq2SeqLM.from_pretrained(model_dir)
-            print("Loading model from disk.")
-        except:
-            model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint)
-            print("Initializing a new instance of the model.")
+    for idx in range((cmd_args.num_epochs // 5)):
 
         args = Seq2SeqTrainingArguments(
             model_dir,
@@ -147,8 +158,6 @@ for checkpoint in models:
         )
 
         trainer.train()
-        trainer.save_model(model_dir)
-        trainer.create_model_card()
 
         results = []
         for item in test_ds:
@@ -161,7 +170,10 @@ for checkpoint in models:
             })
 
         Path("results").mkdir(parents=True, exist_ok=True)
-        with open(f"results/{dir_prefix}_{dataset}_{idx+1}.json", "w") as fp:
-            print(f"Writing file: results/{dir_prefix}_{dataset}_{idx+1}.json")
+        filename = f"results/{dir_prefix}_{dataset}_{run_id}{idx+1}.json"
+        with open(filename, "w") as fp:
+            print(f"Writing file: {filename}")
             json.dump(results, fp, indent=4)
 
+    trainer.save_model(model_dir)
+    trainer.create_model_card()
