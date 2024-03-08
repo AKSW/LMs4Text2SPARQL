@@ -91,7 +91,20 @@
         "How many ports require 'pilotage compulsory'?",
         "How many ports have a mandatory requirement for pilotage?",
         "What is the name of the port located at latitude 61.418333?",
-        "What is the port called at latitude 61.418333?"
+        "What is the port called at latitude 61.418333?",
+	"Is there any port with the label 'Warrnambool'?",
+	"Is there a port called 'Warrnambool'?",
+	"Is there any airport with a total seat count of over 500 million per year?",
+	"Which port has the index number '1955'?",
+	"What is the name of the port with index 1955?",
+	"How many ports provide supplies of diesel oil?",
+	"How many ports provide diesel?",
+	"Is there any port in Russia?",
+	"Does Russia have ports?",
+	"How many ports are classified as Coastal Natural Ports?",
+	"How many ports are on a coast?",
+	"Is there any port with 'Nishtun' as the label?",
+	"Is there a port called Nishtun?"
     ],
     "query": [
         "SELECT ?cranes WHERE { ?port rdfs:label 'Port Antonio' . ?port ns1:hasCranesMobile ?cranes }",
@@ -185,6 +198,19 @@
         "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:isPilotageCompulsory true }",
         "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:isPilotageCompulsory true }",
         "SELECT ?portName WHERE { ?port ns2:hasLatitude 61.418333 . ?port ns1:hasPortName ?portName }",
-        "SELECT ?portName WHERE { ?port ns2:hasLatitude 61.418333 . ?port ns1:hasPortName ?portName }"
+        "SELECT ?portName WHERE { ?port ns2:hasLatitude 61.418333 . ?port ns1:hasPortName ?portName }",
+	"ASK WHERE {?port rdfs:label 'Warrnambool'}",
+	"ASK WHERE {?port rdfs:label 'Warrnambool'}",
+	"ASK WHERE {?airport ns2:hasTotalSeatsPerYear ?seats FILTER(?seats > 500000000)}",
+	"SELECT ?port WHERE {?port ns1:hasIndexNumber '1955'^^xsd:long}",
+	"SELECT ?port WHERE {?port ns1:hasIndexNumber '1955'^^xsd:long}",
+	"SELECT (COUNT(?port) AS ?count) WHERE {?port ns1:hasSuppliesDieselOil true}",
+	"SELECT (COUNT(?port) AS ?count) WHERE {?port ns1:hasSuppliesDieselOil true}",
+	"ASK WHERE {?port ns2:hasCountryLocation <https://data.coypu.org/country/RUS>}",
+	"ASK WHERE {?port ns2:hasCountryLocation <https://data.coypu.org/country/RUS>}",
+	"SELECT (COUNT(?port) AS ?count) WHERE {?port a ns1:CoastalNaturalPort}",
+	"SELECT (COUNT(?port) AS ?count) WHERE {?port a ns1:CoastalNaturalPort}",
+	"ASK WHERE {?port rdfs:label 'Nishtun'}",
+	"ASK WHERE {?port rdfs:label 'Nishtun'}"
     ]
 }

@@ -17,7 +17,14 @@
         "What is the size class of the port with the label 'Juneau'?",
         "What is the size category of the port labeled as 'Juneau'?",
         "What is the latitude of the port with the ID 'AUDKB'?",
-        "What is the latitude of the port identified as 'AUDKB'?"
+        "What is the latitude of the port identified as 'AUDKB'?",
+	"How many airports are there in the knowledge graph?",
+	"Is there any port with a dry dock size class of 'S'?",
+	"Is the port with id 'CASEI' a coastal port?",
+	"Is CASEI a coastal port?",
+	"Is there a port with the port name 'Fushiki'?",
+	"Is there a port called Fushiki?",
+	"How many ports have mobile cranes?"
     ],
     "query": [
         "SELECT ?longitude WHERE { <https://data.coypu.org/infrastructure/port/USJNU> ns2:hasLongitude ?longitude }",
@@ -37,6 +44,13 @@
         "SELECT ?sizeClass WHERE { ?port rdfs:label 'Juneau' . ?port ns1:hasPortSize ?sizeClass }",
         "SELECT ?sizeClass WHERE { ?port rdfs:label 'Juneau' . ?port ns1:hasPortSize ?sizeClass }",
         "SELECT ?latitude WHERE { <https://data.coypu.org/infrastructure/port/AUWMB> ns2:hasLatitude ?latitude }",
-        "SELECT ?latitude WHERE { <https://data.coypu.org/infrastructure/port/AUWMB> ns2:hasLatitude ?latitude }"
+        "SELECT ?latitude WHERE { <https://data.coypu.org/infrastructure/port/AUWMB> ns2:hasLatitude ?latitude }",
+	"SELECT (COUNT(?airport) AS ?count) WHERE { ?airport a ns2:Airport }",
+	"ASK WHERE { ?port ns1:hasDryDock <https://schema.coypu.org/world-port-index#DryDockSizeClass:S> }",
+	"ASK WHERE { <https://data.coypu.org/infrastructure/port/CASEI> a ns1:CoastalPort }",
+	"ASK WHERE { <https://data.coypu.org/infrastructure/port/CASEI> a ns1:CoastalPort }",
+	"ASK WHERE { ?port ns1:hasPortName 'Fushiki'^^xsd:string }",
+	"ASK WHERE { ?port ns1:hasPortName 'Fushiki'^^xsd:string }",
+	"SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasCranesMobile true }"
     ]
 }
