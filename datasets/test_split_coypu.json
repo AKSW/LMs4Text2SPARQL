@@ -24,7 +24,8 @@
 	"Is CASEI a coastal port?",
 	"Is there a port with the port name 'Fushiki'?",
 	"Is there a port called Fushiki?",
-	"How many ports have mobile cranes?"
+	"How many ports have mobile cranes?",
+	"How many airports have a latitude below 40 degrees?"
     ],
     "query": [
         "SELECT ?longitude WHERE { <https://data.coypu.org/infrastructure/port/USJNU> ns2:hasLongitude ?longitude }",
@@ -51,6 +52,7 @@
 	"ASK WHERE { <https://data.coypu.org/infrastructure/port/CASEI> a ns1:CoastalPort }",
 	"ASK WHERE { ?port ns1:hasPortName 'Fushiki'^^xsd:string }",
 	"ASK WHERE { ?port ns1:hasPortName 'Fushiki'^^xsd:string }",
-	"SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasCranesMobile true }"
+	"SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasCranesMobile true }",
+	"SELECT (COUNT(?airport) AS ?count) WHERE { ?airport ns2:hasLatitude ?latitude . FILTER(?latitude < 40) }"
     ]
 }
