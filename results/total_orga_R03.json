@@ -1,0 +1,10 @@
+{
+    "metadata": {
+        "num_epochs": 50,
+        "epochs_per_eval": 5,
+        "total_datapoints": 16
+    },
+    "results": {
+        "facebook/bart-base": "0 | 5 | 9 | 7 | 8 | 9 | 10 | 12 | 9 | 10"
+    }
+}

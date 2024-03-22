@@ -1,0 +1,82 @@
+[
+    {
+        "question": "What is the first name of Anne Miller?",
+        "query": "SELECT ?firstName WHERE { :anne foaf:firstName ?firstName . }",
+        "generated": "SELECT?firstName WHERE { :anne miller foaf:firstName?firstName }"
+    },
+    {
+        "question": "What is the surname of Bob Tanner?",
+        "query": "SELECT ?surname WHERE { :bob foaf:surname ?surname . }",
+        "generated": "SELECT?surname WHERE { :bob tanner foaf:surname?surname }"
+    },
+    {
+        "question": "Which person has a home address in the UK?",
+        "query": "SELECT ?person WHERE { ?person vcard:hasAddress [ vcard:country-name 'UK' ] . }",
+        "generated": "SELECT?person WHERE {?person vcard:hasAddress/vcard:country-name 'UK' }"
+    },
+    {
+        "question": "What is the label of the research department?",
+        "query": "SELECT ?label WHERE { :researchDep rdfs:label ?label . }",
+        "generated": "SELECT?label WHERE { :researchDep rdfs:label?label }"
+    },
+    {
+        "question": "What is the label of the marketing department?",
+        "query": "SELECT ?label WHERE { :marketingDep rdfs:label ?label . }",
+        "generated": "SELECT?label WHERE { :marketingDep rdfs:label?label }"
+    },
+    {
+        "question": "Who is the member of the research department as the chief research officer?",
+        "query": "SELECT ?member WHERE { [ org:member ?member ; org:organization :researchDep ; org:role :chiefResearchOfficer ] . }",
+        "generated": "SELECT?member WHERE {?membership org:member?member ; org:organization :researchDep ; org:role :chiefResearchOfficer }"
+    },
+    {
+        "question": "Who is the member of the marketing department as the marketing manager?",
+        "query": "SELECT ?member WHERE { [ org:member ?member ; org:organization :marketingDep ; org:role :marketingManager ] . }",
+        "generated": "SELECT?member WHERE {?membership org:member?member ; org:organization :marketingDep ; org:role :marketingMember ; org:role :marketingMember ; org:role :marketingMember ; org:role :marketingMember }"
+    },
+    {
+        "question": "How many persons exist in the graph?",
+        "query": "SELECT (count(?person) as ?count) WHERE { ?person a foaf:Person . }",
+        "generated": "SELECT (COUNT(?person) AS?count) WHERE {?person foaf:country-name [] }"
+    },
+    {
+        "question": "How many organizational units exist in the graph?",
+        "query": "SELECT (count(?organizationalUnit) as ?count) WHERE { ?organizationalUnit a org:OrganizationalUnit . }",
+        "generated": "SELECT (COUNT(?orgUnit) AS?count) WHERE {?orgUnit org:unitOf :graph }"
+    },
+    {
+        "question": "How many memberships exist in the graph?",
+        "query": "SELECT (count(?membership) as ?count) WHERE { ?membership a org:Membership . }",
+        "generated": "SELECT (COUNT(?membership) AS?count) WHERE {?membership org:membership }"
+    },
+    {
+        "question": "How many persons are members of the research department?",
+        "query": "SELECT (count(?member) as ?count) WHERE { ?member org:organization :researchDep . }",
+        "generated": "SELECT (COUNT(?person) AS?count) WHERE {?person vcard:hasframe?person ; org:organization :researchDep ; org:role :member?person }"
+    },
+    {
+        "question": "How many persons are members of the marketing department?",
+        "query": "SELECT (count(?member) as ?count) WHERE { ?member org:organization :marketingDep . }",
+        "generated": "SELECT (COUNT(?person) AS?count) WHERE {?person vcard:hasAddress [] }"
+    },
+    {
+        "question": "How many persons have a home address?",
+        "query": "SELECT (count(?person) as ?count) WHERE { ?person vcard:hasAddress [] . }",
+        "generated": "SELECT (COUNT(?person) AS?count) WHERE {?person vcard:hasAddress [] }"
+    },
+    {
+        "question": "How many persons have a home address in the UK?",
+        "query": "SELECT (count(?person) as ?count) WHERE { ?person vcard:hasAddress [ vcard:country-name 'UK' ] . }",
+        "generated": "SELECT (COUNT(?person) AS?count) WHERE {?person vcard:hasAddress/vcard:country-name 'UK' }"
+    },
+    {
+        "question": "How many persons have a home address in the US?",
+        "query": "SELECT (count(?person) as ?count) WHERE { ?person vcard:hasAddress [ vcard:country-name 'US' ] . }",
+        "generated": "SELECT (COUNT(?person) AS?count) WHERE {?person vcard:hasAddress/vcard:country-name 'US' }"
+    },
+    {
+        "question": "How many roles exist in the graph?",
+        "query": "SELECT (count(?role) as ?count) WHERE { ?role a org:Role . }",
+        "generated": "SELECT (COUNT(DISTINCT?role) AS?count) WHERE {?membership org:role?role }"
+    }
+]

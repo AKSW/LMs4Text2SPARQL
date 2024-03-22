@@ -1,0 +1,132 @@
+[
+    {
+        "question": "What is the longitude of the port with the ID 'USJNU'?",
+        "query": "SELECT ?longitude WHERE { <https://data.coypu.org/infrastructure/port/USJNU> ns2:hasLongitude ?longitude }",
+        "generated": "Was ist die L\u00e4nge der Karte, die 'USJNU' hat??longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?longitude?long"
+    },
+    {
+        "question": "What is the longitude of the port identified as 'USJNU'?",
+        "query": "SELECT ?longitude WHERE { <https://data.coypu.org/infrastructure/port/USJNU> ns2:hasLongitude ?longitude }",
+        "generated": "Was ist die L\u00e4nge der 'USJNU' genannten "
+    },
+    {
+        "question": "What is the operating country of the port with the ID 'BRITJ'?",
+        "query": "SELECT ?country WHERE { <https://data.coypu.org/infrastructure/port/BRITJ> ns3:hasOperatingCountry ?country }",
+        "generated": "Was ist das operative Land des portuaires?port ns1:isBRITJ?port ns1:isPort?port ns1:isBRITJ?port ns1:isBRITJ?port ns1:isBRITJ?port ns1:isBRITJ?port ns1:isBRITJ?port ns1:isBRITJ?port ns1:is"
+    },
+    {
+        "question": "What is the country where the port with the identification code 'BRITJ' is located?",
+        "query": "SELECT ?country WHERE { <https://data.coypu.org/infrastructure/port/BRITJ> ns3:hasOperatingCountry ?country }",
+        "generated": "Was ist das Land, in dem sich der port mit dem Identifikationscode 'BRITJ' befindet?"
+    },
+    {
+        "question": "How many ports are located in Italy?",
+        "query": "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns2:hasLocation <https://data.coypu.org/country/ITA> }",
+        "generated": "Wie viele porth\u00e4fen befinden sich in Italien?"
+    },
+    {
+        "question": "What is the number of ports in Italy?",
+        "query": "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns2:hasLocation <https://data.coypu.org/country/ITA> }",
+        "generated": "Was ist der Zahl der H\u00e4fen in Italien?"
+    },
+    {
+        "question": "How many ports have 'fuel oil' supplies available?",
+        "query": "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasSuppliesFuelOil true }",
+        "generated": "Wieviele port 'fuel oil' supplies have?port ns1:hasCraftOil true?port ns1:hasCraftOil true?port ns1:hasCraftOil true?port ns1:hasCraftOil true?port ns1:hasCraftOil true?port ns1:hasCraftOil true?port ns1:hasCraftOil true?port "
+    },
+    {
+        "question": "How many ports offer supplies of 'fuel oil'?",
+        "query": "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasSuppliesFuelOil true }",
+        "generated": "Wieviele port bietet 'fuel oil'?port ns1:hasSupplies-menge-port?port ns1:hasSupplies-menge-port?port ns1:hasSupplies-menge-port?port ns1:hasSupplies-menge-port?port ns1:hasSupplies-menge-port?port ns1:hasSupp"
+    },
+    {
+        "question": "How many ports have 'provisions' supplies available?",
+        "query": "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasSuppliesProvisions true }",
+        "generated": "Wieviele portwaffen 'provisions' supplies?"
+    },
+    {
+        "question": "How many ports have available supplies of 'provisions'?",
+        "query": "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasSuppliesProvisions true }",
+        "generated": "Wieviele portwaffen?port ns1:isnt-ce que provisions accessibles?port ns1:iscountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcountcount"
+    },
+    {
+        "question": "What is the total number of seats per year at the airport with the ID 'SKD'?",
+        "query": "SELECT ?seats WHERE { <https://data.coypu.org/infrastructure/airport/SKD> ns2:hasTotalSeatsPerYear ?seats }",
+        "generated": "Was ist der Gesamtzusammenhang von j\u00e4hrlichen Sitzpl\u00e4tzen an einem beliebigen Ort?"
+    },
+    {
+        "question": "How many seats are available annually at the airport identified as 'SKD'?",
+        "query": "SELECT ?seats WHERE { <https://data.coypu.org/infrastructure/airport/SKD> ns2:hasTotalSeatsPerYear ?seats }",
+        "generated": "Wieviele Sitzpl\u00e4tze stehen j\u00e4hrlich bei 'SKD' zur Verf\u00fcgung??"
+    },
+    {
+        "question": "How many ports require 'Tide restriction'?",
+        "query": "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasEntranceRestrictionTide true }",
+        "generated": "Wieviele portare erfordert 'Tide restriction'?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port "
+    },
+    {
+        "question": "How many ports have restrictions on the use of Tide?",
+        "query": "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasEntranceRestrictionTide true }",
+        "generated": "Wieviele portarten es                  "
+    },
+    {
+        "question": "What is the size class of the port with the label 'Juneau'?",
+        "query": "SELECT ?sizeClass WHERE { ?port rdfs:label 'Juneau' . ?port ns1:hasPortSize ?sizeClass }",
+        "generated": "Was ist die Gr\u00f6\u00dfenklasse des Ports mit dem Label 'Juneau'?"
+    },
+    {
+        "question": "What is the size category of the port labeled as 'Juneau'?",
+        "query": "SELECT ?sizeClass WHERE { ?port rdfs:label 'Juneau' . ?port ns1:hasPortSize ?sizeClass }",
+        "generated": "Was ist die Gr\u00f6\u00dfenkategorie des Ports, 'Juneau',?"
+    },
+    {
+        "question": "What is the latitude of the port with the ID 'AUDKB'?",
+        "query": "SELECT ?latitude WHERE { <https://data.coypu.org/infrastructure/port/AUWMB> ns2:hasLatitude ?latitude }",
+        "generated": "Was ist die Breite des Ports mit dem ID 'AUDKB'?"
+    },
+    {
+        "question": "What is the latitude of the port identified as 'AUDKB'?",
+        "query": "SELECT ?latitude WHERE { <https://data.coypu.org/infrastructure/port/AUWMB> ns2:hasLatitude ?latitude }",
+        "generated": "Quelle latitude hat es in?port rdfs?port ns1?port rdfs?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1"
+    },
+    {
+        "question": "How many airports are there in the knowledge graph?",
+        "query": "SELECT (COUNT(?airport) AS ?count) WHERE { ?airport a ns2:Airport }",
+        "generated": "Wieviele a\u00e9roports yont-ils dans le Graphique du savoir?"
+    },
+    {
+        "question": "Is there any port with a dry dock size class of 'S'?",
+        "query": "ASK WHERE { ?port ns1:hasDryDock <https://schema.coypu.org/world-port-index#DryDockSizeClass:S> }",
+        "generated": "Existe-t-il un port ayant une 'dry dock size class'S'?port ns1 14rd dock rdfs?port ns1 14ber dry dock skala 'S'"
+    },
+    {
+        "question": "Is the port with id 'CASEI' a coastal port?",
+        "query": "ASK WHERE { <https://data.coypu.org/infrastructure/port/CASEI> a ns1:CoastalPort }",
+        "generated": "Ist sand- und wassergesch\u00fctzte Hafen innerhalb des port 'CASEI'?couldne gesehen werden?couldne gesehen werden?couldne gesehen werden?couldne gesehen werden?couldne gesehen werden?couldne gesehen werden?couldne gesehen werden?couldne gesehen werden?couldne gesehen"
+    },
+    {
+        "question": "Is CASEI a coastal port?",
+        "query": "ASK WHERE { <https://data.coypu.org/infrastructure/port/CASEI> a ns1:CoastalPort }",
+        "generated": "Ist CASEI ein K\u00fcstenport?"
+    },
+    {
+        "question": "Is there a port with the port name 'Fushiki'?",
+        "query": "ASK WHERE { ?port ns1:hasPortName 'Fushiki'^^xsd:string }",
+        "generated": "Existe-t-il un port 'Fushiki'?port ns1?port ns1?port ns1 "
+    },
+    {
+        "question": "Is there a port called Fushiki?",
+        "query": "ASK WHERE { ?port ns1:hasPortName 'Fushiki'^^xsd:string }",
+        "generated": "Existe-t-il un port namens Fushiki?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1?port ns1"
+    },
+    {
+        "question": "How many ports have mobile cranes?",
+        "query": "SELECT (COUNT(?port) AS ?count) WHERE { ?port ns1:hasCranesMobile true }",
+        "generated": "Wieviele port sind krone mobile?"
+    },
+    {
+        "question": "How many airports have a latitude below 40 degrees?",
+        "query": "SELECT (COUNT(?airport) AS ?count) WHERE { ?airport ns2:hasLatitude ?latitude . FILTER(?latitude < 40) }",
+        "generated": "Wieviele a\u00e9roports a latitude unter 40 degrees?"
+    }
+]

@@ -1,0 +1,82 @@
+[
+    {
+        "question": "What is the first name of Anne Miller?",
+        "query": "SELECT ?firstName WHERE { :anne foaf:firstName ?firstName . }",
+        "generated": "WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE {"
+    },
+    {
+        "question": "What is the surname of Bob Tanner?",
+        "query": "SELECT ?surname WHERE { :bob foaf:surname ?surname . }",
+        "generated": ":???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????:??????????????????????????"
+    },
+    {
+        "question": "Which person has a home address in the UK?",
+        "query": "SELECT ?person WHERE { ?person vcard:hasAddress [ vcard:country-name 'UK' ] . }",
+        "generated": "WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE {:person vcard:person vcard:person vcard:person } WHERE { WHERE {:person vcard:person vcard:person }"
+    },
+    {
+        "question": "What is the label of the research department?",
+        "query": "SELECT ?label WHERE { :researchDep rdfs:label ?label . }",
+        "generated": "WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE {"
+    },
+    {
+        "question": "What is the label of the marketing department?",
+        "query": "SELECT ?label WHERE { :marketingDep rdfs:label ?label . }",
+        "generated": ":label:label?:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label:label }:label }:label"
+    },
+    {
+        "question": "Who is the member of the research department as the chief research officer?",
+        "query": "SELECT ?member WHERE { [ org:member ?member ; org:organization :researchDep ; org:role :chiefResearchOfficer ] . }",
+        "generated": "WHERE {:organization ::role ::organization org:role }:role }:organization:organization:role }:role }:role }:organization:organization:role }:role }:role }:organization:organization:organization:role }:role }:role }:role }:role }:organization }:organization }:organization }:role }:role }:role }:role }:role }:role }:organization }:organization }:organization }:role }:role }:role }:role }:organization }:role }:role }:role }:role }:role }:role }:organization }:role }:role }:role }:organization }:role }:role }:role }:role }:organization }:role }:role }:role }:role }:organization }:role }:role }:role }:ro"
+    },
+    {
+        "question": "Who is the member of the marketing department as the marketing manager?",
+        "query": "SELECT ?member WHERE { [ org:member ?member ; org:organization :marketingDep ; org:role :marketingManager ] . }",
+        "generated": ":organization ::organization }:organization }:organization }:organization }"
+    },
+    {
+        "question": "How many persons exist in the graph?",
+        "query": "SELECT (count(?person) as ?count) WHERE { ?person a foaf:Person . }",
+        "generated": "WHERE {"
+    },
+    {
+        "question": "How many organizational units exist in the graph?",
+        "query": "SELECT (count(?organizationalUnit) as ?count) WHERE { ?organizationalUnit a org:OrganizationalUnit . }",
+        "generated": "WHERE {"
+    },
+    {
+        "question": "How many memberships exist in the graph?",
+        "query": "SELECT (count(?membership) as ?count) WHERE { ?membership a org:Membership . }",
+        "generated": "WHERE {"
+    },
+    {
+        "question": "How many persons are members of the research department?",
+        "query": "SELECT (count(?member) as ?count) WHERE { ?member org:organization :researchDep . }",
+        "generated": "WHERE { WHERE { WHERE { WHERE { WHERE {:organization org:role ::organiz org:organiz org:organiz org:organiz org:organiz org:organiz org:organiz org:organiz org:organiz org:organiz org:organiz org:organiz org:organiz }:organization:organization:role }:organization:role }:organization:role }:role }:role }:organization }:organization }:organization }:organization }:organization }:organization }:organization }:role }:organization }:role }:organization }:organization }:organization }:organization }:role }:role }:organization }:organization }:role }:organization }:organization }:role }:organization }:role }:organization }:organization }:role }:organization }:organization }:role }:organization }:organization }:role }:organization }:organization }:role }:organization }:organization }:organization }"
+    },
+    {
+        "question": "How many persons are members of the marketing department?",
+        "query": "SELECT (count(?member) as ?count) WHERE { ?member org:organization :marketingDep . }",
+        "generated": ":organization ::role }"
+    },
+    {
+        "question": "How many persons have a home address?",
+        "query": "SELECT (count(?person) as ?count) WHERE { ?person vcard:hasAddress [] . }",
+        "generated": "WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE {:person vcard:HERE {:person vcard:person vcard:organization ::person vcard:organization } WHERE {:person vcard:person vcard:organization } WHERE {:person vcard:role }"
+    },
+    {
+        "question": "How many persons have a home address in the UK?",
+        "query": "SELECT (count(?person) as ?count) WHERE { ?person vcard:hasAddress [ vcard:country-name 'UK' ] . }",
+        "generated": "WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE {:person vcard:person vcard:person vcard:person vcard:person vcard:organization :"
+    },
+    {
+        "question": "How many persons have a home address in the US?",
+        "query": "SELECT (count(?person) as ?count) WHERE { ?person vcard:hasAddress [ vcard:country-name 'US' ] . }",
+        "generated": "WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE { WHERE {:person vcard:hasAddress/vcard:person vcard:organization ::organization ::role }:person vcard:person vcard:organization } WHERE {:person vcard:role }"
+    },
+    {
+        "question": "How many roles exist in the graph?",
+        "query": "SELECT (count(?role) as ?count) WHERE { ?role a org:Role . }",
+        "generated": ":role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }role }:role }:role }:role }:role }:role }:role }:role }:role }:role }:role }:role }:role }:role }:role }:role }:role }:role }:role }:role }:role }"
+    }
+]
