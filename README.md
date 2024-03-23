@@ -4,9 +4,10 @@ This repository contains code to finetune a varietey of LMs with under one billi
 
 ## How to use
 
-There are three datasets available right now:
-- The organizational demo graph
+There are 4 evaluation datasets available right now:
+- An organizational demo graph
 - Sample data from Coypu
+- QALD10
 - LC_QUAD
 
 To run the training for 20 epochs on the coypu dataset for example, execute the following:
